@@ -8,5 +8,5 @@ import com.ecommerce.model.Producto;
 public interface ProductoRepository extends JpaRepository<Producto, Long> {
     
     // Puedes agregar métodos personalizados, por ejemplo:
-    Producto findByProducto(String nombre);
+    Producto findByNombre(String nombre);
 }

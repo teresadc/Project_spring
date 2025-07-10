@@ -18,7 +18,7 @@ public class ProductoService {
     }
 
     public Producto getProductoByName(String productoName) {
-        return productoRepository.findByProducto(productoName);
+        return productoRepository.findByNombre(productoName);
     }
 
     public Producto guardarProducto(Producto productoName) {
