@@ -56,12 +56,14 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(producto)
         });
-
+        console.log('Respuesta:', response); 
         if (response.ok) {
           alert('Producto guardado correctamente.');
           form.reset();
           await cargarProductos(); // Recargar la lista
         } else {
+          const errorText = await response.text(); // 👈 ver el texto de error del backend
+          console.error('Error del servidor:', errorText);
           alert('Error al guardar el producto.');
         }
       } catch (error) {

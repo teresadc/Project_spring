@@ -21,7 +21,7 @@ public class ProductoService {
         return productoRepository.findByNombre(productoName);
     }
 
-    public Producto guardarProducto(Producto productoName) {
-        return productoRepository.save(productoName);
+    public Producto guardarProducto(Producto producto) {
+        return productoRepository.save(producto);
     }
 }
