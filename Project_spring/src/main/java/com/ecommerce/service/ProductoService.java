@@ -24,4 +24,12 @@ public class ProductoService {
     public Producto guardarProducto(Producto producto) {
         return productoRepository.save(producto);
     }
+
+    public void eliminarProductoPorId(Long id) {
+        productoRepository.deleteById(id);
+    }
+
+    public void eliminarProductoPorNombre(String nombre) {
+        productoRepository.deleteByNombre(nombre);
+    }
 }

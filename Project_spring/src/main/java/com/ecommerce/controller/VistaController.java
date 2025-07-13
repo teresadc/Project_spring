@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -45,6 +46,12 @@ public class VistaController {
             productoService.guardarProducto(nuevoProducto);
         }
         return "redirect:/"; // redirigimos para que se actualice la lista
+    }
+
+    @PostMapping("/eliminar/{id}")
+    public String eliminarProducto(@PathVariable Long id) {
+        productoService.eliminarProductoPorId(id);
+        return "redirect:/"; // Redirige a la lista principal
     }
 
     @GetMapping("/prueba")
