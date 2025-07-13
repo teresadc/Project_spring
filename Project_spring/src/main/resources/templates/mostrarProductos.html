@@ -7,6 +7,19 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 <body>
+  <!-- Navbar superior -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Ecommerce</a>
+
+      <div class="d-flex ms-auto">
+        <span class="navbar-text me-3" th:text="'Hola, ' + ${usuario.nombre}">Hola, Usuario</span>
+
+        <a th:href="@{/logout}" class="btn btn-outline-secondary btn-sm">Cerrar sesión</a>
+      </div>
+    </div>
+  </nav>
+
   <div class="container mt-5" style="max-width: 500px;">
     <h1 class="mb-4 text-center">Crear Producto</h1>
 

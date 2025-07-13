@@ -7,28 +7,36 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ecommerce.model.Producto;
+import com.ecommerce.model.Usuario;
 import com.ecommerce.service.ProductoService;
 
+import jakarta.servlet.http.HttpSession;
+
 import java.util.List;
-import java.util.ArrayList;
 
 @Controller
 public class VistaController {
 
     @Autowired
     private ProductoService productoService; // inyectamos el servicio
-    private List<String> productos = new ArrayList<>();
 
-    @GetMapping("/")
-    public String mostrarFormulario(Model model) {
+    @GetMapping("/mostrarProductos")
+    public String mostrarFormulario(Model model, HttpSession session) {
+        // Recuperamos el usuario de la sesión
+        Usuario usuario = (Usuario) session.getAttribute("usuarioLogueado");
+        model.addAttribute("usuario", usuario);
+
+        // Si el usuario no está logueado, redirige al login
+        if (usuario == null) {
+            return "redirect:/";
+        }
         // obtenemos la lista de productos desde la base de datos
         List<Producto> productos = productoService.getAllProducto();
         model.addAttribute("productos", productos);
         try {
-            return "formulario";
+            return "mostrarProductos";
         } catch (Exception e) {
             e.printStackTrace(); // esto debería mostrar si no encuentra la vista
             return "error"; // solo si existe otra plantilla "error.html"
@@ -45,18 +53,13 @@ public class VistaController {
             // guardamos el producto en la base de datos via servicio
             productoService.guardarProducto(nuevoProducto);
         }
-        return "redirect:/"; // redirigimos para que se actualice la lista
+        return "redirect:/mostrarProductos"; // redirigimos para que se actualice la lista
     }
 
     @PostMapping("/eliminar/{id}")
     public String eliminarProducto(@PathVariable Long id) {
         productoService.eliminarProductoPorId(id);
-        return "redirect:/"; // Redirige a la lista principal
+        return "redirect:/mostrarProductos"; // Redirige a la lista principal
     }
 
-    @GetMapping("/prueba")
-    @ResponseBody
-    public String prueba() {
-        return "funciona";
-    }
 }

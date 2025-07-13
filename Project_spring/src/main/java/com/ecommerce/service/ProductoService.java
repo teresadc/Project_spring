@@ -28,8 +28,4 @@ public class ProductoService {
     public void eliminarProductoPorId(Long id) {
         productoRepository.deleteById(id);
     }
-
-    public void eliminarProductoPorNombre(String nombre) {
-        productoRepository.deleteByNombre(nombre);
-    }
 }
