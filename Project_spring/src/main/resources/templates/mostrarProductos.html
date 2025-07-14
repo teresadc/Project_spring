@@ -13,7 +13,7 @@
       <a class="navbar-brand" href="#">Ecommerce</a>
 
       <div class="d-flex ms-auto">
-        <span class="navbar-text me-3" th:text="'Hola, ' + ${usuario.nombre}">Hola, Usuario</span>
+        <span class="navbar-text me-3" th:text="'Hola, ' + ${usuario.nombre} + ' ' + ${usuario.apellido1}">Hola, Usuario</span>
 
         <a th:href="@{/logout}" class="btn btn-outline-secondary btn-sm">Cerrar sesión</a>
       </div>
